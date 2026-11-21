@@ -1,0 +1,9 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { emptyData } from '../js/core/model.ts';
+import { dictionary, PositionDictionaryService } from '../js/core/dictionary.ts';
+import { validateData, validateDictionary } from '../js/core/validation.ts';
+import { LocalRepository, type LocalStorageAdapter } from '../js/services/storage.ts';
+test('onboarding languages and map validation',()=>{const d=emptyData();assert.equal(validateData(d,dictionary).settings.target,'en');d.settings.native='en';d.settings.target='uk';assert.equal(validateData(d,dictionary).settings.target,'uk');d.settings.target='en';assert.throws(()=>validateData(d,dictionary));d.settings.target='uk';d.settings.mapId='nuke';assert.throws(()=>validateData(d,dictionary));});
+test('dictionary loads only sourced bilingual positions and known aliases',()=>{const d=validateDictionary(dictionary);const service=new PositionDictionaryService(d);assert.equal(service.positions().length,20);assert.equal(service.name('mirage.window','uk'),'Вікно');assert.equal(service.matches('mirage.palace',' ПАЛАЦ! ','uk'),true);assert.equal(service.matches('mirage.palace','Window','en'),false);assert.equal(service.search('конектор')[0].id,'mirage.connector');const bad=structuredClone(d);bad.positions[0].sourceIds=['unknown'];assert.throws(()=>validateDictionary(bad));});
+test('adapter persists and restores a validated snapshot across repository instances',async()=>{let snapshot:any=null;const adapter:LocalStorageAdapter={kind:'test',load:async()=>snapshot,save:async d=>{snapshot=structuredClone(d);},clear:async()=>{snapshot=null;}};const repo=new LocalRepository(adapter,dictionary);const d=await repo.load();d.settings.name='Persisted player';await repo.save(d);assert.equal((await new LocalRepository(adapter,dictionary).load()).settings.name,'Persisted player');await assert.rejects(repo.import('{"version":999}'));assert.equal(snapshot.settings.name,'Persisted player');});

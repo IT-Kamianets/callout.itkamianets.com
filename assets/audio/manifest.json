@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "generatedAt": "2026-11-15T12:18:46.850507+00:00",
+  "recipe": {
+    "version": 1,
+    "pitch": 0.95,
+    "tempo": 1.26,
+    "effective_speed": 1.1969999999999998,
+    "normalization": {
+      "I": -18,
+      "TP": -2,
+      "LRA": 7,
+      "short_clip_peak": -3
+    },
+    "codec": "libvorbis",
+    "quality": 5,
+    "channels": 1,
+    "piper_length_scale": 1
+  },
+  "toolchain": {
+    "piper": "1.8.0",
+    "ffmpeg": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers"
+  },
+  "models": {
+    "en": {
+      "id": "en_US-ryan-medium",
+      "sha256": "33b53106e049f68a51f014e4fa10bf5a04e0f7d6668692dc05228cc4554c1d71",
+      "configSha256": "774482143a035ce5ec26e3546b50f079de282b27eb3f8498b8a03906edbfe564",
+      "declaredSampleRate": 22050
+    }
+  },
+  "languages": {
+    "en": {
+      "status": "not-generated",
+      "voice": "en_US-ryan-medium",
+      "phrases": 230
+    },
+    "uk": {
+      "status": "model-missing",
+      "voice": null,
+      "phrases": 200
+    }
+  },
+  "entries": [],
+  "statistics": {
+    "state": "prepared-without-recordings",
+    "recordings": 0
+  },
+  "note": "Generated audio removed at the owner’s request. Generator, models and integration retained."
+}

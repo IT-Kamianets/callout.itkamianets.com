@@ -1,0 +1,6 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { TrainingClock } from '../js/core/clock.ts';
+test('timer reaches zero at the exact deadline, never goes negative',()=>{const clock=new TrainingClock();clock.start(4500,1000);assert.equal(clock.remaining(1000),4500);assert.equal(clock.expired(5499),false);assert.equal(clock.remaining(5500),0);assert.equal(clock.expired(5500),true);assert.equal(clock.remaining(8000),0);assert.equal(clock.elapsed(8000),7000);});
+test('paused initial audio does not count toward reaction, replay can be timed independently',()=>{const clock=new TrainingClock();clock.start(9000,1000);clock.pause(1000);assert.equal(clock.elapsed(5000),0);assert.equal(clock.expired(50000),false);clock.resume(5000);assert.equal(clock.elapsed(6500),1500);assert.equal(clock.remaining(6500),7500);clock.pause(6500);clock.pause(7000);clock.resume(10000);assert.equal(clock.elapsed(11000),2500);});
+test('unlimited training never expires and restarting after reload resets current-question clock',()=>{const clock=new TrainingClock();clock.start(0,0);assert.equal(clock.expired(1e9),false);assert.equal(clock.remaining(1e9),Infinity);clock.start(7000,10000);assert.equal(clock.elapsed(12000),2000);clock.start(7000,99999);assert.equal(clock.remaining(99999),7000);});

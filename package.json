@@ -1,0 +1,27 @@
+{
+  "name": "callout",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "node --experimental-strip-types --test-isolation=none --test tests/*.test.ts",
+    "test:built": "node --test-isolation=none --test tests/build.test.mjs",
+    "check": "npm test && npm run build && npm run test:built",
+    "voices:generate": "/home/dima/callout-voices/.venv/bin/python scripts/generate_callouts.py",
+    "voices:sync": "node --experimental-strip-types scripts/sync-audio.ts",
+    "prestart": "npm run voices:sync",
+    "prebuild": "npm run voices:sync",
+    "voices:test": "/home/dima/callout-voices/.venv/bin/python -m unittest discover -s tests -p test_generator.py -v"
+  },
+  "devDependencies": {
+    "vite": "8.3.3",
+    "typescript": "6.0.3",
+    "@types/node": "25.9.3"
+  },
+  "engines": {
+    "node": ">=22.18"
+  }
+}

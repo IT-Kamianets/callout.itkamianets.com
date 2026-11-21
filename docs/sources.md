@@ -1,0 +1,11 @@
+# Mirage names, Ukrainian translations and supplied radar
+
+The current learning pair is English ↔ Ukrainian. Internal locale: `uk`; speech locale: `uk-UA`; interface badge: UA. English position names and English aliases reference [Total CS](https://totalcsgo.com/callouts/mirage), with the short Ticket form cross-checked in [CS2 Atlas](https://cs2.jzr.uz/maps/mirage).
+
+Ukrainian primary names are editorial translations of those position names, explicitly requested by the product owner. Their `uk-editorial` source notes explain this provenance; they are not advertised as official Valve terms or as a verified universal Ukrainian community slang standard. Examples: Window → Вікно; Stairs → Сходи; Chair → Стілець; Ladder Room → Кімната з драбиною. Unverified Ukrainian slang aliases are not added to scored exercises.
+
+The previous approximate map has been replaced. `assets/maps/mirage-radar.png` is the exact second image supplied by the owner in this conversation. It was not generated, redrawn or downloaded from a source website. Its provenance is owner-supplied; no claim of original authorship or independently verified redistribution licensing is made. The original file is retained unchanged.
+
+`assets/maps/mirage.svg` embeds those same image bytes in a viewport of `(270, 140, 1060, 920)` from the full 1600×1200 reference. This removes unused outer margin without changing radar geometry. Marker coordinates originate in source-image pixels and are normalized by `radarPoint()` in `js/core/map-geometry.ts`. The UI fits the entire coordinate plane at that aspect ratio before zooming, so labels and artwork remain registered on desktop and mobile. Underpass is below the main level and may share the overhead projection with an upper route.
+
+Stable position IDs are unchanged. The map/locale update migrates old snapshots before schema validation and persistence. Historical answers and schedules remain, while old-language audio is not presented as Ukrainian listening performance. Correct historical typed answers can use the new Ukrainian label; incorrect free-text user input is preserved verbatim for audit rather than silently rewritten. See `docs/audio-mobile.md` for sound and phone troubleshooting.
